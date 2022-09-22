@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Autoglass.Models.Produto>
+
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<h1>Listagem de Produtos</h1>
+
+<div class="float-lg-end">
+    <form method="get" asp-action="Index">
+        <p>
+            <input class="rounded-pill" search" placeholder="   Produrar produtos por codigo ou descrição" value="@ViewData["GetProdutoDetalhes"]" name="ProdutoProcura" style="width:400px" />
+            <input class="btn btn-outline-primary rounded-pill" type="submit" value="Procurar" />
+            <a class="btn btn-outline-secondary rounded-pill" asp-action="Index">Todos os produtos</a>
+        </p>
+    </form>
+</div>
+
+
+<p>
+    <a class="btn btn-success rounded-pill" asp-action="AddOrEdit">Cadastrar Novo Produto</a>
+</p>
+<div>
+    <table class="table table-striped table-bordered table-dark table-hover">
+        <thead class="">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodProduto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DescProd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.validade)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CodForne)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.quantidade)
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                 <td>
+                    @Html.DisplayFor(modelItem => item.CodProduto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescProd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.validade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CodForne)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quantidade)
+                </td>
+           
+                    <td>
+                        <a class="btn btn-success rounded" asp-action="Edit" asp-route-id="@item.CodProduto">Alterar Dados</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-secondary rounded" asp-action="Details" asp-route-id="@item.CodProduto">Mostrar Detalhes</a>
+                    </td>
+                     <td>
+                        <a class="btn btn-danger rounded" asp-action="Delete" asp-route-id="@item.CodProduto">Remover Registro</a>
+                    </td>
+          
+            </tr>
+    }
+        </tbody>
+    </table>
+</div>
